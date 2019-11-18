@@ -11,6 +11,7 @@ template:
   required:
     - build
     - repo
+    - vault
   info:
     git url: >
       "[" + $env.repository + "]" +
@@ -60,6 +61,13 @@ services:
           PROD_CLUSTER_NAME: '{{form.pipeline.parameters.prod-cluster-name}}'
           PROD_CLUSTER_NAMESPACE: '{{form.pipeline.parameters.prod-cluster-namespace}}'
         execute: true
+  vault:
+    service_id: keyprotect
+    parameters:
+      name: keyprotect-secrets
+      vault-region: "ibm:ys1:us-south"
+      vault-resource-group: Default
+      vault-name: "Key Protect-q9"  
   webide:
     service_id: orion
 form:
